@@ -25,7 +25,7 @@ def change_data(new_list):
     """Меняет формат данных для вывода даты"""
     for i in new_list:
         date_new = datetime.fromisoformat(i['date'])
-        date_formatted = date_new.strftime("%d %B %Y ")  # День Месяц Год
+        date_formatted = date_new.strftime("%d.%m.%Y")  # День Месяц Год
         i['date'] = date_formatted
     return (new_list)
 
