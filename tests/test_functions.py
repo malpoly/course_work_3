@@ -136,3 +136,25 @@ def test_preparation(test_data):
              "description": "Перевод организации",
              "from": "MasterCard 7158 **** **** 6758",
              "to": "Счет **5560"}]
+
+
+def test_total():
+    assert functions.total_inference([{"id": 441945886,
+                                       "state": "EXECUTED",
+                                       "date": "26.08.2019",
+                                       "operationAmount": {"amount": "31957.58",
+                                                           "currency": {"name": "руб.",
+                                                                        "code": "RUB"}},
+                                       "description": "Перевод организации",
+                                       "from": "Maestro 1596 **** **** 5199",
+                                       "to": "Счет **9589"},
+                                      {"id": 41428829,
+                                       "state": "EXECUTED",
+                                       "date": "03.07.2019",
+                                       "operationAmount": {"amount": "8221.37",
+                                                           "currency": {"name": "USD",
+                                                                        "code": "USD"}},
+                                       "description": "Перевод организации",
+                                       "from": "MasterCard 7158 **** **** 6758",
+                                       "to": "Счет **5560"}
+                                      ]) == "26.08.2019 Перевод организации Maestro 1596 **** **** 5199 -> Счет **9589 31957.58 руб."
