@@ -107,3 +107,32 @@ def test_change(test_data):
              "from": "MasterCard 7158300734726758",
              "to": "Счет 35383033474447895560"}]
 
+
+def test_preparation(test_data):
+    assert functions.preparation_accounts(test_data) == [{"id": 441945886,
+             "state": "CANCELED",
+             "date": "2019-08-26T10:50:58.294041",
+             "operationAmount": {"amount": "31957.58",
+                                 "currency": {"name": "руб.",
+                                              "code": "RUB"}},
+             "description": "Перевод организации",
+             "from": "Maestro 1596 **** **** 5199",
+             "to": "Счет **9589"},
+            {"id": 957763565,
+             "state": "EXECUTED",
+             "date": "2019-01-05T00:52:30.108534",
+             "operationAmount": {"amount": "87941.37",
+                                 "currency": {"name": "руб.",
+                                              "code": "RUB"}},
+             "description": "Перевод со счета на счет",
+             "from": "Счет **8409",
+             "to": "Счет **8266"},
+            {"id": 41428829,
+             "state": "EXECUTED",
+             "date": "2019-07-03T18:35:29.512364",
+             "operationAmount": {"amount": "8221.37",
+                                 "currency": {"name": "USD",
+                                              "code": "USD"}},
+             "description": "Перевод организации",
+             "from": "MasterCard 7158 **** **** 6758",
+             "to": "Счет **5560"}]
