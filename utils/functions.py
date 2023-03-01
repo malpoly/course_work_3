@@ -15,23 +15,24 @@ def sorting_data(all_operations, count_operations=-5):
     data_list =[]
     count = -5 if count_operations is None else count_operations
     for position in all_operations:
-        if position != {} and position['state'] == 'EXECUTED':
+        if position != {}: # and position['state'] == 'EXECUTED':
             data_list.append(position)
     new_list = sorted(data_list, key=itemgetter('date'))
     return new_list[count:]
 
 
 def change_data(new_list):
-    """Меняет формат данных для вывода даты"""
-    for i in new_list:
+    """Меняет формат данных для вывода даты и сортирует их в нужном формате"""
+    total_list = sorted(new_list, key=itemgetter('date'), reverse=True)
+    for i in total_list:
         date_new = datetime.fromisoformat(i['date'])
         date_formatted = date_new.strftime("%d.%m.%Y")  # День Месяц Год
         i['date'] = date_formatted
-    return new_list
+    return total_list
 
-def preparation_accounts(new_list):
+def preparation_accounts(total_list):
     """Меняет формат вывода счетов"""
-    for i in new_list:
+    for i in total_list:
         i['to'] = "Счет **" + i['to'][-4:]
         if i.get(('from')) != None:
             if "Maestro" in i['from']:
@@ -42,19 +43,19 @@ def preparation_accounts(new_list):
                 i['from'] = "Счет **" + i['from'][-4:]
             elif "MasterCard" in i['from']:
                 i['from'] = "MasterCard " + i['from'][11:15] + " **** **** " + i['from'][-4:]
-    return new_list
+    return total_list
 
 
-def print_inference(new_list):
+def print_inference(total_list):
     """Подготавливает данные на печать и выводит их"""
-    for i in new_list:
+    for i in total_list:
         print(i['date'], i['description'], "" if i.get('from') == None else i.get('from'), "->", i['to'],
           i['operationAmount']['amount'], i['operationAmount']['currency']['name'], end="\n\n")
 
 
 all_operations = load_operations()
-new_list = preparation_accounts(change_data(sorting_data(all_operations)))
-print_inference(new_list)
+new_list = sorting_data(all_operations)
+print(new_list)
 
 
 

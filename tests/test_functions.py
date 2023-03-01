@@ -88,15 +88,6 @@ def test_change(test_data):
              "description": "Перевод организации",
              "from": "Maestro 1596837868705199",
              "to": "Счет 64686473678894779589"},
-            {"id": 957763565,
-             "state": "EXECUTED",
-             "date": "05.01.2019",
-             "operationAmount": {"amount": "87941.37",
-                                 "currency": {"name": "руб.",
-                                              "code": "RUB"}},
-             "description": "Перевод со счета на счет",
-             "from": "Счет 46363668439560358409",
-             "to": "Счет 18889008294666828266"},
             {"id": 41428829,
              "state": "EXECUTED",
              "date": "03.07.2019",
@@ -105,7 +96,16 @@ def test_change(test_data):
                                               "code": "USD"}},
              "description": "Перевод организации",
              "from": "MasterCard 7158300734726758",
-             "to": "Счет 35383033474447895560"}]
+             "to": "Счет 35383033474447895560"},
+            {"id": 957763565,
+             "state": "EXECUTED",
+             "date": "05.01.2019",
+             "operationAmount": {"amount": "87941.37",
+                                 "currency": {"name": "руб.",
+                                              "code": "RUB"}},
+             "description": "Перевод со счета на счет",
+             "from": "Счет 46363668439560358409",
+             "to": "Счет 18889008294666828266"}]
 
 
 def test_preparation(test_data):
@@ -136,3 +136,14 @@ def test_preparation(test_data):
              "description": "Перевод организации",
              "from": "MasterCard 7158 **** **** 6758",
              "to": "Счет **5560"}]
+
+def test_print():
+    assert functions.print_inference([{"id": 441945886,
+             "state": "CANCELED",
+             "date": "26.08.2019",
+             "operationAmount": {"amount": "31957.58",
+                                 "currency": {"name": "руб.",
+                                              "code": "RUB"}},
+             "description": "Перевод организации",
+             "from": "Maestro 1596 **** **** 5199",
+             "to": "Счет **9589"}]) == []
