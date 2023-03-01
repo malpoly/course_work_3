@@ -9,7 +9,6 @@ def load_operations():
     all_operations = json.loads(operations.text)
     return all_operations
 
-all_operations = load_operations()
 
 def sorting_data(all_operations, count_operations=-5):
     """Выводит данные по последним 5(по умолчанию) исполненным операциям"""
@@ -20,6 +19,37 @@ def sorting_data(all_operations, count_operations=-5):
             data_list.append(position)
     new_list = sorted(data_list, key=itemgetter('date'))
     return new_list[count:]
+
+
+def change_data(new_list):
+    """Меняет формат данных для вывода даты"""
+    for i in new_list:
+        date_new = datetime.fromisoformat(i['date'])
+        date_formatted = date_new.strftime("%d %B %Y ")  # День Месяц Год
+        i['date'] = date_formatted
+    return (new_list)
+
+def print_inference(new_list):
+    """Подготавливает данные на печать и выводит их"""
+    for i in new_list:
+        print(i['date'], i['description'], "" if i.get('from') == None else i.get('from'), "Счет ***", i['to'][-4:],
+          i['operationAmount']['amount'], i['operationAmount']['currency']['name'])
+
+
+all_operations = load_operations()
+new_list = change_data(sorting_data(all_operations))
+print_inference(new_list)
+
+
+
+
+        #if i.get('from') == None:
+            #print("")
+        #else:
+            #print(i.get('from'))
+        #print("" if i.get('from') == None else i.get('from'))
+
+
 
 
 
