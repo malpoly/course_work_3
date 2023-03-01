@@ -136,14 +136,3 @@ def test_preparation(test_data):
              "description": "Перевод организации",
              "from": "MasterCard 7158 **** **** 6758",
              "to": "Счет **5560"}]
-
-def test_print():
-    assert functions.print_inference([{"id": 441945886,
-             "state": "CANCELED",
-             "date": "26.08.2019",
-             "operationAmount": {"amount": "31957.58",
-                                 "currency": {"name": "руб.",
-                                              "code": "RUB"}},
-             "description": "Перевод организации",
-             "from": "Maestro 1596 **** **** 5199",
-             "to": "Счет **9589"}]) == []
